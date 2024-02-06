@@ -29,3 +29,15 @@ function updateCategory(string $name, string $description, int $id) : bool
 
     return $statement->rowCount() > 0;
 }
+function createCategory(string $name, string $description) : bool
+{
+    global $connection;
+    $statement = $connection->prepare("insert into categories (name, description) values (:name, :description)");
+    $statement->execute([
+        ':name' => $name,
+        ':description' => $description
+
+    ]);
+
+    return $statement->rowCount() > 0;
+}
